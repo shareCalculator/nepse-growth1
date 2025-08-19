@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEPSE Growth Calculator</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 50px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+      width: 350px;
+    }
+    .card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ff99;
+      margin-bottom: 20px;
+      transition: all 0.5s ease-in-out;
+    }
+    .day {
+      font-size: 1.2rem;
+      color: #ddd;
+    }
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 15px;
+      text-align: center;
+      width: 100%;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #00ff99;
+      color: #000;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #00cc77;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>NEPSE Growth Simulation 📈</h1>
+    
+    <input type="number" id="startPrice" placeholder="Enter Opening Price" />
+    <button onclick="setOpeningPrice()">Set Price</button>
+
+    <div class="price" id="price">Price: Rs. 0</div>
+    <div class="day" id="day">Day: 0</div>
+    <button onclick="nextDay()">Next Day ➡</button>
+  </div>
+
+  <script>
+    let price = 0;
+    let day = 0;
+
+    function setOpeningPrice() {
+      const inputValue = document.getElementById("startPrice").value;
+      if (inputValue && inputValue > 0) {
+        price = parseFloat(inputValue);
+        day = 1;
+        document.getElementById("price").textContent = "Price: Rs. " + price.toFixed(2);
+        document.getElementById("day").textContent = "Day: " + day;
+      } else {
+        alert("Please enter a valid price.");
+      }
+    }
+
+    function nextDay() {
+      if (price <= 0) {
+        alert("Please set an opening price first.");
+        return;
+      }
+      day++;
+      price = price * 1.10; // increase 10%
+      document.getElementById("price").textContent = "Price: Rs. " + price.toFixed(2);
+      document.getElementById("day").textContent = "Day: " + day;
+    }
+  </script>
+
+</body>
+</html>
